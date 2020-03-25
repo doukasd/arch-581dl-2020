@@ -7,11 +7,13 @@ const int NUM_STATES = 5;
 int state = 0;
 bool buttonState = LOW;
 bool lastButtonState = LOW;
-float speed = 0.98;
+float speed = 0.9;
 float currentValue = 0;
 
 void setup() {
   Serial.begin(9600);
+  while(!Serial);
+  Serial.println("value,red,green,blue");
   
   pinMode(LED_R_PIN, OUTPUT);
   pinMode(LED_G_PIN, OUTPUT);
@@ -46,8 +48,8 @@ void loop() {
   int blue = ledValue(currentValue, 3.0); //inRange(currentValue, 2, 3) ? int((currentValue-2.0) * 255.0) : 0;
 
   // log
-  Serial.print(currentValue * 255.0);
-  Serial.print(":");
+  Serial.print(currentValue * 255);
+  Serial.print(",");
   Serial.print(red);
   Serial.print(",");
   Serial.print(green);
